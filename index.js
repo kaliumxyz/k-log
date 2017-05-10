@@ -1,5 +1,6 @@
 const fs = require('fs')
 
+// Logs the current date and a string (text) to a file named log in the same dir.
 function log(text) {
 	text = JSON.stringify(new Date()) + " - " + text + "\n"
 	console.log(text)
