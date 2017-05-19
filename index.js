@@ -1,9 +1,9 @@
 const fs = require('fs')
 
 // Logs the current date and a string (text) to a file named log in the same dir.
-function log(text, fileName, formatting) {
+function log(text, filename, formatting) {
 
-	filename = filename || "log"
+	filename = filename || "log.log"
 
 	if (!formatting)
 	text = JSON.stringify(new Date()) + " - " + text + "\n"
