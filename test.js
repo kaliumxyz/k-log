@@ -1,5 +1,5 @@
 import test from 'ava'
-const log = require('./')
+const log = require('./').log
 
 
 test('log 1 arg', t => {
