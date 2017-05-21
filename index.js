@@ -16,7 +16,12 @@ class logger{
 
 // legacy support
 function log(text, filename, formatting, print) {
-	let templogger = new logger(text, filename, formatting, print)
+	if (formatting)
+		text = JSON.stringify(new Date()) + " - " + text + "\n"
+	if (print)
+		console.log(text)
+	const stream = fs.createWriteStream(filename, { flags: 'a', defaultEncoding: 'utf8' })
+	stream.write(text)
 	return true
 }
 
