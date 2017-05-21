@@ -15,7 +15,7 @@ class logger{
 }
 
 // legacy support
-function log(text, filename, formatting, print) {
+function log(text, filename = 'log.log', formatting = true, print = true){
 	if (formatting)
 		text = JSON.stringify(new Date()) + " - " + text + "\n"
 	if (print)
