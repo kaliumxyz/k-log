@@ -1,23 +1,26 @@
 'use strict'
 const fs = require('fs')
+const EventEmitter = require('events')
+
 
 // Logs the current date and a string (text) to a file named log in the same dir.
-class logger{
-	constructor(filename = 'log.log', formatting = true, print = true, ...callback) {
+class logger extends EventEmitter {
+	constructor(filename = 'logs.log', formatting = true, print = true, ...callback) {
+		super()
 		this.stream = fs.createWriteStream(filename, { flags: 'a', defaultEncoding: 'utf8' })
 		this.formatting = formatting
 		this.filename = filename
 		this.print = print
 		this.write = this.stream.write
-		this.stream.on('open', _=> {
+		this.stream.on('open', data => {
+			this.emit('open')
 			if (callback)
-			this.call(...callback)
-	})
-		// this.stream.on('close', _=>console.log('write close'))
+				callback.forEach(f => f(data))
+		})
+		this.stream.on('close', _=>this.emit('close'))
 	}
 
 	log(text, filename, formatting = this.formatting, print = this.print, ...callback){
-
 		if (formatting)
 			text = JSON.stringify(new Date()) + " - " + text + "\n"
 		if (print)
@@ -28,17 +31,14 @@ class logger{
 		} else
 		this.stream.write(text)
 
-		this.call(...callback)
+		if (callback)
+			callback.forEach(f => f())
 		return true
 
 	}
-	call(...callback) {
-		if (callback)
-			try {
-				callback.forEach(e => e())
-			} catch (e) {
-				console.error(`Your callback function(s) threw the following error: `, e)
-			}
+	l(){
+		arguments.forEach(arg => log(arg))
+		return true
 	}
 }
 
