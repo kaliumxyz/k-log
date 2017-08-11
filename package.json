@@ -1,6 +1,6 @@
 {
   "name": "k-log",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "NPM needs more logging scripts.",
   "main": "index.js",
   "repository": "github.com/kaliumxyz/k-log",
@@ -11,8 +11,5 @@
   },
   "scripts": {
     "test": "ava"
-  },
-  "dependencies": {
-    "fs": "^0.0.1-security"
   }
 }

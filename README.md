@@ -1,22 +1,23 @@
 # k-log [![Build Status](https://travis-ci.org/kaliumxyz/k-log.svg?branch=master)](https://travis-ci.org/kaliumxyz/k-log)
-> minimal logger, I needed one.
+> zero dependencies logger, as minimal as possible.
 
 ## install
 simply download it from npm.
 ```
-$ yarn add -D k-log
+$ npm i -D k-log
 ```
 
 
 ## usage
-Require it in your script.
+Require it in your script and feed it a writestream to get the logger function back.
 ```js
-const log = require('k-log')
+const logStream = fs.createWriteStream(path.join(__dirname, `application.log`), { flags: 'a' })
+const log = require('./lib/logger')(logStream)
 ```
 
 ## Tests
 ```
-$ yarn test
+$ npm test
 ```
 
 ## license
